@@ -1,0 +1,70 @@
+$width: 92px;
+$height: 104px;
+
+.pony {
+	position: absolute;
+	width: $width;
+	height: 0;
+	z-index: 10000;
+
+	> .colors {
+		position: absolute;
+		left: -50%;
+		bottom: 0;
+		--index: 0;
+		--x: calc(var(--index) * -92px);
+		width: 100%;
+		height: $height;
+
+		> * {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			-webkit-mask-image: url('../../../assets/images/pony-anim.png');
+			mask-image: url('../../../assets/images/pony-anim.png');
+		}
+
+		> .color-1 {
+			background: var(--col-1);
+			-webkit-mask-position: var(--x) 0;
+			mask-position: var(--x) 0;
+		}
+
+		> .color-2 {
+			background: var(--col-2);
+			-webkit-mask-position: var(--x) -1*$height;
+			mask-position: var(--x) -1*$height;
+		}
+
+		> .color-3 {
+			background: var(--col-3);
+			-webkit-mask-position: var(--x) -2*$height;
+			mask-position: var(--x) -2*$height;
+		}
+
+		> .color-4 {
+			background: var(--col-4);
+			-webkit-mask-position: var(--x) -3*$height;
+			mask-position: var(--x) -3*$height;
+		}
+	}
+}
+
+.flip {
+	transform: scale(-1, 1);
+}
+
+.tip {
+	position: absolute;
+	left: 0;
+	top: -$height - 4px;
+	width: 250px;
+	background: var(--col-1);
+	border: 2px solid;
+	padding: 2px;
+	transform: translate(-50%, -100%);
+	line-height: 1;
+	text-align: center;
+}

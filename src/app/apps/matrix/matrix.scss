@@ -1,0 +1,21 @@
+:host {
+	--col-1: #000000;
+	--col-2: #008000;
+	--col-3: #00ff00;
+	--col-4: #ffffff;
+}
+
+$width: 12px;
+
+.container {
+	display: flex;
+	line-height: 18px;
+	letter-spacing: 4px;
+
+	.column {
+		width: $width;
+		min-width: $width;
+		max-width: $width;
+		word-break: break-all;
+	}
+}

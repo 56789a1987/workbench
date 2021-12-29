@@ -1,0 +1,41 @@
+<app-window #window caption="Minesweeper" [size]="size" [scroller]="false" [resizer]="false" (onclose)="close()">
+	<div class="container d-flex-column unselectable" style="justify-content: flex-start;">
+		<div class="menubar">
+			<button (click)="init()">New</button>
+			<button (click)="showMenu = !showMenu">Settings</button>
+		</div>
+		<div class="toolbar">
+			<div class="display">{{ minesLeft }}</div>
+			<div #timer class="display" style="text-align: right;">0</div>
+		</div>
+		<div class="panel" [style.width.px]="panelWidth">
+			<button *ngFor="let t of panel; index as i" (click)="click(i)" (contextmenu)="toggleFlag(i, $event)"
+				[ngClass]="t.class" [class.flagged]="t.flagged" [class.active]="gameOver === i"></button>
+		</div>
+		<div *ngIf="showMenu" class="toolbar-menu" style="left: 40px;">
+			<button (click)="setSize(9, 9, 10)">Beginner</button>
+			<button (click)="setSize(16, 16, 40)">Intermediate</button>
+			<button (click)="setSize(30, 16, 99)">Expert</button>
+			<button (click)="openCustom()">Custom...</button>
+		</div>
+	</div>
+</app-window>
+
+<app-window *ngIf="showCustom" caption="Custom Field" [size]="size2" [scroller]="false" [resizer]="false" (onclose)="showCustom = false">
+	<div class="container d-flex unselectable">
+		<div class="column" style="margin-left: 15px;">
+			<div class="label">Height</div>
+			<div class="label">Width</div>
+			<div class="label">Mines</div>
+		</div>
+		<div class="column" style="margin-left: 5px;">
+			<input [(ngModel)]="customHeight" pattern="[0-9]*" maxlength="5" autocomplete="off">
+			<input [(ngModel)]="customWidth" pattern="[0-9]*" maxlength="5" autocomplete="off">
+			<input [(ngModel)]="customMines" pattern="[0-9]*" maxlength="5" autocomplete="off">
+		</div>
+		<div class="column" style="margin-left: 10px;">
+			<button (click)="applyCustom()" style="margin-bottom: 32px;">OK</button>
+			<button (click)="showCustom = false">CANCEL</button>
+		</div>
+	</div>
+</app-window>

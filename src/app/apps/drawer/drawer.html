@@ -1,0 +1,14 @@
+<app-window #window [caption]="caption" [size]="size" [scroller]="false" [resizer]="true" (onclose)="close()">
+	<div #container class="icons-container">
+		<app-icon *ngFor="let i of icons" [label]="i.label" [icon]="i.icon" [activeIcon]="i.activeIcon" [connectDir]="i.connectDir"
+			[noMove]="i.noMove" [style.left.px]="getX(i)" [style.top.px]="getY(i)" (dropped)="dropIcon(i, $event.icon, $event.pointer)"
+			(execute)="i.execute(portals)" (selected)="bringToFront(i)"></app-icon>
+	</div>
+	<div *ngIf="value >= 0" class="bar">
+		<div class="full"></div>
+		<div class="bar-outer">
+			<div class="bar-inner" [style.height.%]="value"></div>
+		</div>
+		<div class="empty"></div>
+	</div>
+</app-window>

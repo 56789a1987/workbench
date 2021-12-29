@@ -1,0 +1,5 @@
+<app-window caption="Game Of Life" [size]="size" [scroller]="false" (resized)="resize($event); random()" (onclose)="close()">
+	<div class="container">
+		<canvas #canvas (click)="random()"></canvas>
+	</div>
+</app-window>

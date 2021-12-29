@@ -1,0 +1,57 @@
+<app-window caption="Preferences" [size]="size" [resizer]="false" [scroller]="false" [close]="false">
+	<div class="container unselectable d-flex-column">
+		<div class="flex-1">
+			<div class="panel-title">Workbench</div>
+			<div class="panel mb-3">
+				<label class="form-item"><input type="checkbox" [(ngModel)]="settings.noFlashing">Disable error flashing</label>
+			</div>
+			<div class="panel-title">Windows</div>
+			<div class="panel mb-3">
+				<label class="form-item"><input type="checkbox" [(ngModel)]="settings.clickToFront">Click window to front</label>
+				<label class="form-item"><input type="checkbox" [(ngModel)]="settings.dragWithContent">Drag window with content</label>
+				<label class="form-item"><input type="checkbox" [(ngModel)]="settings.resizeWithContent">Resize window with content</label>
+			</div>
+			<div class="d-flex mb-3">
+				<div class="flex-1 d-flex-column" style="justify-content: center;">
+					<div class="panel-title">Double click speed</div>
+					<div class="d-flex range-slider">
+						Slow
+						<input type="range" min="200" max="1200" step="100" style="direction: rtl;" [(ngModel)]="dblClickDelay">
+						Fast
+					</div>
+				</div>
+				<div class="panel margin-left">
+					<app-icon [icon]="previewIcon" [activeIcon]="previewIcon" (execute)="togglePreviewIcon()" [draggable]="false"></app-icon>
+				</div>
+			</div>
+			<div class="mb-3">
+				<div class="panel-title">Beep volume</div>
+				<div class="d-flex range-slider">
+					Low&nbsp;
+					<input type="range" min="0" max="100" step="1" [(ngModel)]="beepVolume" (pointerup)="playBeep()">
+					High
+				</div>
+			</div>
+		</div>
+		<table class="buttons" cellPadding="0" cellSpacing="4">
+			<tr>
+				<td colspan="2"><button (click)="openColors()">Edit Colors</button></td>
+				<td colspan="2"><button (click)="openPointer()">Edit Pointer</button></td>
+			</tr>
+			<tr>
+				<td><button (click)="export()">Export</button></td>
+				<td>
+					<input #importFile type="file" (input)="import(importFile.files[0])" style="display: none;">
+					<button (click)="importFile.click()">Import</button>
+				</td>
+				<td><button (click)="resetToDefault()">Reset All</button></td>
+				<td><button (click)="resetToLast()">Last Saved</button></td>
+			</tr>
+			<tr>
+				<td colspan="2"><button (click)="resetToLast(); close();">Cancel</button></td>
+				<td><button (click)="close()">Use</button></td>
+				<td><button (click)="save(); close();">Save</button></td>
+			</tr>
+		</table>
+	</div>
+</app-window>

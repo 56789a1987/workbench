@@ -1,0 +1,131 @@
+.container {
+	width: 100%;
+	height: 100%;
+}
+
+.toolbar {
+	display: flex;
+	justify-content: flex-start;
+	padding: 8px;
+	border-bottom: 2px solid var(--col-4);
+}
+
+.toolbar-group {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	flex-shrink: 0;
+	justify-content: flex-start;
+	border-left: 2px solid var(--col-4);
+	border-top: 2px solid var(--col-4);
+	height: 86px;
+	margin-right: 8px;
+}
+
+.toolbar-buttons {
+	flex-shrink: 0;
+
+	> button {
+		display: block;
+		height: 26px;
+		width: 52px;
+
+		&:not(:last-child) {
+			margin-bottom: 6px;
+			height: 24px;
+		}
+	}
+}
+
+.toolbar-btn {
+	position: relative;
+	border: none;
+	border-right: 2px solid var(--col-4);
+	border-bottom: 2px solid var(--col-4);
+	width: 42px;
+	height: 42px;
+}
+
+.toolbar-menu {
+	position: absolute;
+	background-color: var(--col-4);
+	border: 2px solid var(--col-1);
+	padding: 2px;
+
+	> button {
+		min-height: 20px;
+		min-width: 36px;
+		display: block;
+		border: none;
+		color: var(--col-1);
+		background-color: var(--col-4);
+
+		&:active, &.active {
+			color: var(--col-2);
+			background-color: var(--col-3);
+		}
+	}
+}
+
+.color-btn {
+	background: none !important;
+
+	.btn-icon {
+		width: 32px;
+		height: 16px;
+	}
+
+	&:active, &.active {
+		box-shadow: 0 0 0 4px var(--col-2);
+	}
+}
+
+.tool-item:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 40px;
+	height: 40px;
+	background-color: currentColor;
+	-webkit-mask-image: url("../../../assets/images/paint-tools.png");
+	mask-image: url("../../../assets/images/paint-tools.png");
+	-webkit-mask-position: var(--x) 0px;
+	mask-position: var(--x) 0px;
+}
+
+.btn-icon {
+	background-color: currentColor;
+	margin: auto;
+}
+
+.content {
+	overflow: hidden;
+	margin: 2px;
+}
+
+.corner {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 16px;
+	height: 18px;
+	background-color: var(--col-1);
+}
+
+.col-1 {
+	background-color: var(--col-1);
+}
+
+.col-2 {
+	background-color: var(--col-2);
+}
+
+.col-3 {
+	background-color: var(--col-3);
+}
+
+.col-4 {
+	background-color: var(--col-4);
+}

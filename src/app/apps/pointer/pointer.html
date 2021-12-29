@@ -1,0 +1,47 @@
+<app-window caption="Pointer" [size]="size" [resizer]="false" [scroller]="false" [close]="false">
+	<div class="container">
+		<div class="d-flex top-panel">
+			<div class="canvas-box">
+				<canvas #canvas class="canvas" width="256" height="256" (customDrag)="drag($event)"></canvas>
+				<div class="point" [style.left.px]="point[0] * 16 + 4" [style.top.px]="point[1] * 16 + 4"></div>
+			</div>
+			<div #previews class="previews">
+				<div class="col-1"></div>
+				<div class="col-4"></div>
+				<div class="col-3"></div>
+				<div class="col-2"></div>
+			</div>
+			<div class="top-buttons flex-1">
+				<button (click)="reset()">Restore</button>
+				<button (click)="clear()">Clear</button>
+				<button (click)="resetColors()">Reset Colors</button>
+				<button [class.active]="setPoint" (click)="setPoint = !setPoint">Set Point</button>
+			</div>
+		</div>
+		<div class="d-flex">
+			<div class="flex-1 panel">
+				<div class="palettes d-flex">
+					<div [style.background]="toCSS(colors[0])" [class.active]="index === 1" (click)="setIndex(1)"></div>
+					<div [style.background]="toCSS(colors[1])" [class.active]="index === 2" (click)="setIndex(2)"></div>
+					<div [style.background]="toCSS(colors[2])" [class.active]="index === 3" (click)="setIndex(3)"></div>
+					<div class="empty" [class.active]="index === 0" (click)="setIndex(0)"></div>
+				</div>
+				<div class="sliders flex-1">
+					<div class="slider">
+						<div class="label">R</div><input type="range" value="0" min="0" max="15" step="1" [disabled]="!index" [(ngModel)]="sliders[0]" (ngModelChange)="redraw()">
+					</div>
+					<div class="slider">
+						<div class="label">G</div><input type="range" value="0" min="0" max="15" step="1" [disabled]="!index" [(ngModel)]="sliders[1]" (ngModelChange)="redraw()">
+					</div>
+					<div class="slider">
+						<div class="label">B</div><input type="range" value="0" min="0" max="15" step="1" [disabled]="!index" [(ngModel)]="sliders[2]" (ngModelChange)="redraw()">
+					</div>
+				</div>
+			</div>
+			<div class="bottom-buttons">
+				<button (click)="ok()">OK</button>
+				<button (click)="cancel()">Cancel</button>
+			</div>
+		</div>
+	</div>
+</app-window>

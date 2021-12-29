@@ -1,0 +1,20 @@
+<app-window #window caption="Message Board" [size]="size" (onclose)="close()">
+	<div *ngIf="board else noBoard" class="contents">
+		<li *ngFor="let item of board">
+			<span [title]="item.date">{{ item.name }}</span>: {{ item.message }}
+		</li>
+		<br>
+		<li>Syntax is <span>Name: Message</span></li>
+		<li>Each user can only send one message every 6 hours.</li>
+		<br>
+		<li *ngIf="message"><span>{{ message }}</span></li>
+		<li class="input-line">
+			<span>Enter</span>&gt;<input maxlength="120" autocomplete="off" [(ngModel)]="userInput" (keydown)="keydown($event)" />
+		</li>
+	</div>
+	<ng-template #noBoard>
+		<div class="contents">
+			<li><span>{{ message || 'Loading...' }}</span></li>
+		</div>
+	</ng-template>
+</app-window>

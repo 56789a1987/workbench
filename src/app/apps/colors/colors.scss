@@ -1,0 +1,98 @@
+.container {
+	margin: 4px 6px 12px 6px;
+}
+
+.buttons {
+	display: flex;
+
+	> button {
+		flex: 1;
+		height: 24px;
+		border-left: 1px solid var(--col-2);
+		border-right: 1px solid var(--col-2);
+		border-top: 2px solid var(--col-2);
+		border-bottom: 2px solid var(--col-2);
+	}
+
+	> button:not(:first-child) {
+		margin-left: 8px;
+	}
+}
+
+.slider {
+	display: flex;
+	align-items: center;
+
+	> input {
+		flex: 1;
+		width: 0px;
+		background: var(--col-3);
+		margin: 0;
+	}
+
+	> input::-webkit-slider-thumb {
+		background: var(--col-4);
+		width: 6px;
+		height: 14px;
+	}
+
+	.label {
+		margin-right: 4px;
+	}
+}
+
+.slider:not(:last-child) {
+	margin-bottom: 8px;
+}
+
+.palette {
+	touch-action: none;
+	display: flex;
+
+	> div {
+		height: 28px;
+		padding: 2px 1px;
+		border-left: 1px solid var(--col-1);
+		border-right: 1px solid var(--col-1);
+		border-top: 2px solid var(--col-1);
+		border-bottom: 2px solid var(--col-1);
+		background-clip: content-box;
+		flex: 1;
+
+		&.active {
+			border-color: var(--col-4);
+		}
+	}
+}
+
+.preview {
+	margin-right: 6px;
+	width: 27px;
+	padding: 2px 1px;
+	border-left: 1px solid var(--col-4);
+	border-right: 1px solid var(--col-4);
+	border-top: 2px solid var(--col-4);
+	border-bottom: 2px solid var(--col-4);
+	background-clip: content-box;
+}
+
+.preview-text {
+	margin-left: 6px;
+	align-self: center;
+}
+
+.col-1 {
+	background-color: var(--col-1);
+}
+
+.col-2 {
+	background-color: var(--col-2);
+}
+
+.col-3 {
+	background-color: var(--col-3);
+}
+
+.col-4 {
+	background-color: var(--col-4);
+}

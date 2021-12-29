@@ -1,0 +1,28 @@
+<app-window caption="Palette" [size]="size" [resizer]="false" [scroller]="false" [close]="false">
+	<div class="container palette">
+		<div class="col-1" [class.active]="index === 0" (click)="index = 0"></div>
+		<div class="col-2" [class.active]="index === 1" (click)="index = 1"></div>
+		<div class="col-3" [class.active]="index === 2" (click)="index = 2"></div>
+		<div class="col-4" [class.active]="index === 3" (click)="index = 3"></div>
+	</div>
+	<div class="container d-flex unselectable">
+		<div class="preview" [ngClass]="previewClass"></div>
+		<div class="sliders flex-1">
+			<div class="slider">
+				<div class="label">R</div><input type="range" value="0" min="0" max="15" step="1" [(ngModel)]="colors[index][0]" (ngModelChange)="updateColors()">
+			</div>
+			<div class="slider">
+				<div class="label">G</div><input type="range" value="0" min="0" max="15" step="1" [(ngModel)]="colors[index][1]" (ngModelChange)="updateColors()">
+			</div>
+			<div class="slider">
+				<div class="label">B</div><input type="range" value="0" min="0" max="15" step="1" [(ngModel)]="colors[index][2]" (ngModelChange)="updateColors()">
+			</div>
+		</div>
+		<div class="preview-text">{{text}}</div>
+	</div>
+	<div class="container buttons">
+		<button (click)="saveColors()">OK</button>
+		<button (click)="resetColors()">RESET</button>
+		<button (click)="cancelColors()">CANCEL</button>
+	</div>
+</app-window>

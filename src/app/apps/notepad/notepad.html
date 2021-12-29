@@ -1,0 +1,16 @@
+<app-window caption="Notepad" [size]="size" [scroller]="false" (resized)="resized()" (onclose)="close()">
+	<div class="container d-flex">
+		<div class="d-flex flex-1 panel">
+			<textarea #textArea class="flex-1 hide-scroll" [(ngModel)]="text[index]" spellcheck="false" autocomplete="off"></textarea>
+			<div class="next-button" (click)="next()"></div>
+		</div>
+		<div class="d-flex-column sidebar">
+			<button class="button" (click)="prev()">{{ index }}</button>
+			<button class="button up" (click)="scrollUp()"></button>
+			<div #scrollbar class="flex-1 scrollbar">
+				<button class="button thumb" [style.height.%]="scrollerHeight" [style.top.%]="scrollerTop" (customDrag)="dragScroller($event)"></button>
+			</div>
+			<button class="button down" (click)="scrollDown()"></button>
+		</div>
+	</div>
+</app-window>

@@ -1,0 +1,23 @@
+<app-window caption="Random text" [size]="size" [minSize]="minSize" [scroller]="false" (onclose)="close()">
+	<div class="container">
+		<div class="label">Characters</div>
+		<div>
+			<button [class.active]="hasFlag(1)" (click)="toggleFlag(1)">Numbers</button>
+			<button [class.active]="hasFlag(2)" (click)="toggleFlag(2)">Uppercase</button>
+			<button [class.active]="hasFlag(4)" (click)="toggleFlag(4)">Lowercase</button>
+			<button [class.active]="hasFlag(8)" (click)="toggleFlag(8)">Punctuations</button>
+		</div>
+		<div class="label mt-4">Length</div>
+		<div class="label">
+			<input class="number-input" type="number" min="1" max="100000" step="1" pattern="[0-9]*" [(ngModel)]="length" (ngModelChange)="fixLength()">
+		</div>
+		<div>
+			<textarea rows="5" readonly [(ngModel)]="result"></textarea>
+		</div>
+		<div class="footer">
+			<button [disabled]="!canCopy" (click)="copy()">Copy</button>
+			<button (click)="clear()">Clear</button>
+			<button [disabled]="!canGenerate" (click)="generate()">Generate</button>
+		</div>
+	</div>
+</app-window>

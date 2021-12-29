@@ -1,0 +1,7 @@
+<app-window caption="Clock" [size]="size" [minSize]="minSize" [scroller]="false" (onclose)="close()" (resized)="resized()">
+	<div class="container">
+		<canvas #canvas></canvas>
+		<div class="hr12-label">{{ hr12Text }}</div>
+		<div class="date-label">{{ dateText }}</div>
+	</div>
+</app-window>

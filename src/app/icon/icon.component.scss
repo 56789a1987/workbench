@@ -1,0 +1,89 @@
+:host {
+	display: block;
+	float: left;
+}
+
+@mixin offset($index) {
+	-webkit-mask-position: calc(var(--w) * -#{$index}) var(--y);
+	mask-position: calc(var(--w) * -#{$index}) var(--y);
+}
+
+.icon {
+	position: relative;
+	text-align: center;
+
+	> .colors {
+		margin: 0 auto;
+	}
+}
+
+.label {
+	line-height: 1;
+	white-space: pre;
+	text-align: center;
+}
+
+.colors {
+	position: relative;
+	height: var(--h);
+	width: var(--w);
+	touch-action: none;
+
+	> div {
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		-webkit-mask-image: url("../../assets/images/icons-build.png");
+		mask-image: url("../../assets/images/icons-build.png");
+	}
+
+	> .color-1 {
+		background: var(--col-1);
+		-webkit-mask-position: 0px var(--y);
+		mask-position: 0px var(--y);
+	}
+
+	> .color-2 {
+		background: var(--col-2);
+		@include offset(1);
+	}
+
+	> .color-3 {
+		background: var(--col-3);
+		@include offset(2);
+	}
+
+	> .color-4 {
+		background: var(--col-4);
+		@include offset(3);
+	}
+}
+
+.icon.active > .colors:not(.with-active), .colors.dragging:not(.with-active) {
+	> .color-1 {
+		background: var(--col-2);
+	}
+
+	> .color-2 {
+		background: var(--col-1);
+	}
+
+	> .color-3 {
+		background: var(--col-4);
+	}
+
+	> .color-4 {
+		background: var(--col-3);
+	}
+}
+
+.icon.active > .colors.with-active > div, .colors.dragging.with-active > div {
+	--y: var(--active-y);
+}
+
+.colors.dragging {
+	position: absolute;
+	z-index: 999999;
+}

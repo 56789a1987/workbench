@@ -1,0 +1,30 @@
+:host {
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.window {
+	min-width: 90px;
+	min-height: 80px;
+}
+
+.content {
+	overflow: hidden;
+}
+
+.window.scroll {
+	> .content {
+		overflow: scroll;
+	}
+}
+
+.indicator {
+	position: absolute;
+	box-sizing: border-box;
+	border: 2px solid #FFFFFF;
+	z-index: 999999;
+	mix-blend-mode: difference;
+	pointer-events: none;
+}

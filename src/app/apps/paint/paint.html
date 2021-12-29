@@ -1,0 +1,55 @@
+<app-window caption="Paint" [size]="size" [minSize]="minSize" [scroller]="false" (resized)="resized()" (onclose)="close()">
+	<div class="container d-flex-column">
+		<div class="toolbar">
+			<div class="toolbar-group" [style.width.px]="86">
+				<div class="toolbar-btn tool-item" [style.--x.px]="-tool * 40"></div>
+				<button class="toolbar-btn" (click)="toggleMenu(1)">
+					<div class="btn-icon" [style.width.px]="brushSize" [style.height.px]="brushSize"></div>
+				</button>
+				<button class="toolbar-btn" (click)="toggleMenu(2)">
+					<div class="btn-icon" [style.width.px]="28" [style.height.px]="28" [ngClass]="colorClass"></div>
+				</button>
+				<button class="toolbar-btn" (click)="toggleMenu(3)">
+					<div class="btn-icon" [style.width.px]="28" [style.height.px]="lineSize"></div>
+				</button>
+				<div *ngIf="showMenu === 1" class="toolbar-menu" style="left: -2px; top: 100%;">
+					<button *ngFor="let s of brushSizes" [class.active]="brushSize === s" (click)="brushSize = s; toggleMenu(0)">
+						<div class="btn-icon" [style.width.px]="s" [style.height.px]="s"></div>
+					</button>
+				</div>
+				<div *ngIf="showMenu === 2" class="toolbar-menu" style="right: 0; top: 50%;">
+					<button class="color-btn" [class.active]="color === 0" (click)="color = 0; toggleMenu(0)">
+						<div class="btn-icon col-1"></div>
+					</button>
+					<button class="color-btn" [class.active]="color === 1" (click)="color = 1; toggleMenu(0)">
+						<div class="btn-icon col-2"></div>
+					</button>
+					<button class="color-btn" [class.active]="color === 2" (click)="color = 2; toggleMenu(0)">
+						<div class="btn-icon col-3"></div>
+					</button>
+					<button class="color-btn" [class.active]="color === 3" (click)="color = 3; toggleMenu(0)">
+						<div class="btn-icon col-4"></div>
+					</button>
+				</div>
+				<div *ngIf="showMenu === 3" class="toolbar-menu" style="right: 0; top: 100%;">
+					<button *ngFor="let s of brushSizes" [class.active]="lineSize === s" (click)="lineSize = s; toggleMenu(0)">
+						<div class="btn-icon" [style.width.px]="28" [style.height.px]="s"></div>
+					</button>
+				</div>
+			</div>
+			<div class="toolbar-group" [style.width.px]="toolbarWidth">
+				<button *ngFor="let t of toolTypes; index as i" class="toolbar-btn tool-item" [style.--x.px]="-i * 40"
+					[class.active]="tool === i" (click)="switchTool(i)"></button>
+			</div>
+			<div class="toolbar-buttons">
+				<button (click)="undo()">Undo</button>
+				<button (click)="redo()">Redo</button>
+				<button (click)="save()">Save</button>
+			</div>
+		</div>
+		<div #content class="content flex-1">
+			<canvas #canvas (customDrag)="drag($event)" [outsideAngular]="true"></canvas>
+		</div>
+	</div>
+	<div class="corner"></div>
+</app-window>

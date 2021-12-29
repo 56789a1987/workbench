@@ -1,0 +1,23 @@
+<div #window class="window" [class.scroll]="scroller" [style.left.px]="size.x" [style.top.px]="size.y"
+	[style.width.px]="size.w" [style.height.px]="size.h" [style.z-index]="zIndex">
+	<div class="title-bar">
+		<div *ngIf="close" class="btn-group-left">
+			<div class="close" (click)="onclose.emit()"></div>
+		</div>
+		<div class="title-text" (customDrag)="drag($event, false)" [outsideAngular]="true">
+			<div class="title">{{ caption }}</div>
+			<div class="title-mask"></div>
+		</div>
+		<div class="btn-group-right">
+			<div class="front-back back" (click)="back()"></div>
+			<div class="front-back front" (click)="front()"></div>
+		</div>
+	</div>
+	<div class="content">
+		<ng-content></ng-content>
+	</div>
+	<div *ngIf="resizer" class="resizer unselectable" (customDrag)="drag($event, true)" [outsideAngular]="true"></div>
+</div>
+
+<div class="indicator" *ngIf="indicator"
+	[style.left.px]="toRect.x" [style.top.px]="toRect.y" [style.width.px]="toRect.w" [style.height.px]="toRect.h"></div>

@@ -1,0 +1,64 @@
+.bar {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	left: 0;
+	top: 0;
+	width: 14px;
+	height: calc(100% - var(--scroller-h));
+	background: var(--col-3);
+	border-right: 2px solid var(--col-4);
+
+	.bar-outer {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+
+	.bar-inner {
+		background: var(--col-2);
+	}
+
+	.empty, .full {
+		height: 14px;
+		background-repeat: no-repeat;
+		background-size:
+			2px 10px,
+			6px 2px,
+			4px 2px,
+			6px 2px;
+		background-image:
+			linear-gradient(90deg, var(--col-4) 10px, transparent 10px),
+			linear-gradient(0deg, var(--col-4) 6px, transparent 6px),
+			linear-gradient(0deg, var(--col-4) 4px, transparent 4px),
+			linear-gradient(0deg, var(--col-4) 6px, transparent 6px);
+	}
+
+	.empty {
+		background-position:
+			3px 2px,
+			3px 2px,
+			3px 6px,
+			3px 10px;
+	}
+
+	.full {
+		background-position:
+			3px 2px,
+			3px 2px,
+			3px 6px,
+			3px 2px;
+	}
+}
+
+.icons-container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+
+	> app-icon {
+		position: absolute;
+	}
+}

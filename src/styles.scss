@@ -1,0 +1,509 @@
+@font-face {
+	font-family: 'ModernDOS8x16';
+	src: url('assets/fonts/ModernDOS8x16.ttf');
+}
+
+$font-family: 'ModernDOS8x16', Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", "monospace";
+
+body {
+	margin: 0;
+	--col-1: #0055aa;
+	--col-2: #ff8800;
+	--col-3: #000000;
+	--col-4: #ffffff;
+	--scroller-h: 0px;
+	--cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWAgMAAAC52oSoAAAADFBMVEUAAAAAAADdIiL/zKrFp8XvAAAAAXRSTlMAQObYZgAAAD1JREFUCNdjCA0NZQACKBX//38AgopatR6F+soApTDllgJF4RRrQBRQFEqB+EBRBMUAFYVJLmVAohgCYBQAbWwj3bvRSGYAAAAASUVORK5CYII=') 1 1;
+	overflow: hidden;
+	cursor: var(--cursor), default;
+}
+
+* {
+	-webkit-tap-highlight-color: transparent;
+	outline: none;
+}
+
+*, *:before, *:after {
+	@extend .pixelate;
+	box-sizing: border-box;
+}
+
+p {
+	color: var(--col-4);
+	margin: 4px;
+	font-family: $font-family;
+}
+
+/* COMMON */
+.unselectable {
+	user-select: none;
+}
+
+.pixelate {
+	-ms-interpolation-mode: nearest-neighbor;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: pixelated;
+}
+
+::selection {
+	background-color: var(--col-4);
+	color: var(--col-1);
+}
+
+::-webkit-scrollbar {
+	height: 16px;
+	width: 14px;
+	background: var(--col-1);
+}
+
+::-webkit-scrollbar:vertical {
+	border-left: 2px solid var(--col-4);
+}
+
+::-webkit-scrollbar:horizontal {
+	border-top: 2px solid var(--col-4);
+}
+
+::-webkit-scrollbar-corner {
+	background: var(--col-4);
+}
+
+::-webkit-scrollbar-track:disabled {
+	background-color: var(--col-4);
+	border: 2px solid transparent;
+	background-clip: content-box;
+}
+
+::-webkit-scrollbar-track:disabled:vertical {
+	border-left-width: 4px;
+}
+
+::-webkit-scrollbar-track:disabled:horizontal {
+	border-top-width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--col-4);
+	border: 2px solid transparent;
+	background-clip: content-box;;
+}
+
+::-webkit-scrollbar-thumb:active {
+	background-color: var(--col-3);
+}
+
+::-webkit-scrollbar-thumb:vertical {
+	border-left-width: 4px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+	border-top-width: 4px;
+}
+
+::-webkit-scrollbar-button {
+	height: 14px;
+	width: 13px;
+	background-color: var(--col-4);
+	--fore: var(--col-1);
+	background-repeat: no-repeat;
+	@extend .pixelate;
+}
+
+::-webkit-scrollbar-button:active {
+	background-color: var(--col-3);
+	--fore: var(--col-2);
+}
+
+::-webkit-scrollbar-button:vertical {
+	border-left: 1px solid var(--col-4);
+	background-size:
+		6px 2px,
+		10px 2px,
+		14px 2px,
+		2px 10px;
+	background-image:
+		linear-gradient(90deg, var(--fore) 6px, transparent 6px),
+		linear-gradient(90deg, var(--fore) 2px, transparent 2px, transparent 8px, var(--fore) 8px),
+		linear-gradient(90deg, var(--fore) 2px, transparent 2px, transparent 12px, var(--fore) 12px),
+		linear-gradient(0deg, var(--fore) 10px, transparent 10px);
+}
+
+::-webkit-scrollbar-button:vertical:decrement {
+	border-bottom: 2px solid var(--col-4);
+	background-position: 4px 0, 2px 2px, 0px 4px, 6px 2px;
+}
+
+::-webkit-scrollbar-button:vertical:increment {
+	border-top: 2px solid var(--col-4);
+	background-position: 4px 10px, 2px 8px, 0px 6px, 6px 0px;
+}
+
+::-webkit-scrollbar-button:horizontal {
+	border-top: 2px solid var(--col-4);
+	background-size:
+		3px 6px,
+		3px 10px,
+		3px 14px,
+		9px 2px;
+	background-image:
+		linear-gradient(0deg, var(--fore) 6px, transparent 6px),
+		linear-gradient(0deg, var(--fore) 2px, transparent 2px, transparent 8px, var(--fore) 8px),
+		linear-gradient(0deg, var(--fore) 2px, transparent 2px, transparent 12px, var(--fore) 12px),
+		linear-gradient(90deg, var(--fore) 9px, transparent 9px);
+}
+
+::-webkit-scrollbar-button:horizontal:decrement {
+	border-right: 2px solid var(--col-4);
+	background-position: 0px 4px, 2px 2px, 4px 0px, 2px 6px;
+}
+
+::-webkit-scrollbar-button:horizontal:increment {
+	border-left: 2px solid var(--col-4);
+	background-position: 8px 4px, 6px 2px, 4px 0px, 0px 6px;
+}
+
+.hide-scroll {
+	-ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+
+	&::-webkit-scrollbar {
+		display: none; /* Safari and Chrome */
+	}
+}
+
+/* TITLE BAR */
+.title-bar {
+	height: 20px;
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	background: var(--col-4);
+	box-sizing: border-box;
+	touch-action: none;
+	user-select: none;
+	/* CLOSE BUTTON */
+	.btn-group-left {
+		margin-left: 2px;
+
+		.close {
+			width: 24px;
+			height: 20px;
+			border-left: 2px solid var(--col-1);
+			border-right: 2px solid var(--col-1);
+			background: var(--col-3);
+			box-shadow: 0 0 0 2px var(--col-4) inset, 0 0 0 4px var(--col-1) inset, 0 0 0 8px var(--col-4) inset;
+
+			&:active {
+				border-color: var(--col-2);
+				background: var(--col-4);
+				box-shadow: 0 0 0 2px var(--col-3) inset, 0 0 0 4px var(--col-2) inset, 0 0 0 8px var(--col-3) inset;
+			}
+		}
+	}
+
+	/* FRONT/BACK BUTTONS */
+	.btn-group-right {
+		margin: 0 3px;
+
+		.front-back {
+			position: relative;
+			float: left;
+			height: 20px;
+			width: 24px;
+			background: var(--col-4);
+			border-left: 2px solid var(--col-1);
+
+			&:last-child {
+				width: 26px;
+				border-right: 2px solid var(--col-1);
+			}
+
+			&:active {
+				background: var(--col-3);
+				border-color: var(--col-2);
+			}
+
+			&:before, &:after {
+				content: '';
+				position: absolute;
+				width: 14px;
+				height: 12px;
+				border: 2px solid;
+			}
+
+			&:before {
+				left: 2px;
+				top: 2px;
+			}
+
+			&:after {
+				right: 2px;
+				bottom: 2px;
+			}
+		}
+
+		.front:after, .back:before {
+			background: var(--col-4);
+			border-color: var(--col-1);
+		}
+
+		.front:before, .back:after {
+			background: var(--col-3);
+			border-color: var(--col-3);
+		}
+
+		.front:active:after, .back:active:before {
+			background: var(--col-3);
+			border-color: var(--col-2);
+		}
+
+		.front:active:before, .back:active:after {
+			background: var(--col-4);
+			border-color: var(--col-4);
+		}
+	}
+	/* TITLE TEXT */
+	.title-text {
+		position: relative;
+		flex: 1;
+		overflow: hidden;
+		color: var(--col-1);
+
+		.title {
+			line-height: 1;
+			height: 20px;
+			max-width: 100%;
+			display: inline-block;
+			padding: 2px 3px;
+			background: var(--col-4);
+			overflow: hidden;
+			white-space: pre;
+			text-overflow: ellipsis;
+		}
+	}
+}
+
+/* WINDOW */
+.window {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 0 0 2px var(--col-4) inset;
+
+	/* TITLE BAR */
+	> .title-bar {
+		border-left: 2px solid var(--col-4);
+
+		.title-text {
+			background: var(--col-4);
+			background-image: linear-gradient(transparent 4px, var(--col-1) 4px);
+			background-size: 1px 8px;
+			background-repeat: repeat;
+		}
+	}
+
+	&:not(.active) > .title-bar .title-text .title-mask {
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 100%;
+		background-size: 4px 2px;
+		background-repeat: repeat-x;
+		background-position:
+			0 0, 2px 2px,
+			0 4px, 2px 6px,
+			0 8px, 2px 10px,
+			0 12px, 2px 14px,
+			0 16px, 2px 18px;
+		background-image:
+			linear-gradient(90deg, transparent 3px, var(--col-4) 1px),
+			linear-gradient(90deg, transparent 3px, var(--col-4) 1px),
+			linear-gradient(90deg, transparent 3px, var(--col-4) 1px),
+			linear-gradient(90deg, transparent 3px, var(--col-4) 1px),
+			linear-gradient(90deg, transparent 3px, var(--col-4) 1px),
+			linear-gradient(90deg, transparent 3px, var(--col-4) 1px),
+			linear-gradient(90deg, transparent 3px, var(--col-4) 1px),
+			linear-gradient(90deg, transparent 3px, var(--col-4) 1px),
+			linear-gradient(90deg, transparent 3px, var(--col-4) 1px),
+			linear-gradient(90deg, transparent 3px, var(--col-4) 1px);
+	}
+
+	/* RESIZER */
+	> .resizer {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		width: 16px;
+		height: 18px;
+		background: var(--col-4);
+		touch-action: none;
+
+		&:before, &:after {
+			content: '';
+			position: absolute;
+			border: 2px solid var(--col-1);
+		}
+
+		&:before {
+			left: 2px;
+			top: 2px;
+			width: 6px;
+			height: 6px;
+		}
+
+		&:after {
+			right: 2px;
+			bottom: 2px;
+			width: 8px;
+			height: 10px;
+		}
+
+		&:active {
+			background: var(--col-3);
+		}
+
+		&:active:before, &:active:after {
+			border-color: var(--col-2);
+		}
+	}
+
+	/* WINDOW CONTENT */
+	> .content {
+		position: relative;
+		flex: 1;
+		margin: 2px;
+		margin-top: 0;
+		background: var(--col-1);
+		color: var(--col-4);
+	}
+}
+
+a {
+	color: var(--col-4);
+
+	&:active {
+		color: var(--col-2);
+	}
+}
+
+/* INPUT */
+input, button, textarea, select {
+	padding: 0 2px;
+	background: var(--col-1);
+	color: var(--col-4);
+	border: 2px solid var(--col-4);
+	font-family: inherit;
+	font-size: 16px;
+	border-radius: 0;
+	box-shadow: none;
+	appearance: none;
+	-webkit-appearance: none;
+	cursor: inherit;
+}
+
+label {
+	cursor: inherit;
+}
+
+input:disabled, button:disabled, textarea:disabled, select:disabled {
+	color: var(--col-3);
+	pointer-events: none;
+}
+
+input::-ms-clear, input::-ms-reveal {
+	display: none;
+}
+
+button {
+	user-select: none;
+}
+
+button:active, button.active {
+	background: var(--col-2);
+	color: var(--col-3);
+}
+
+input[type=range] {
+	height: 22px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	height: 14px;
+	width: 8px;
+	border: none;
+	box-shadow: none;
+	background: var(--col-1);
+	background-repeat: no-repeat;
+	background-image:
+		linear-gradient(0deg, var(--col-4) 14px, transparent 14px),
+		linear-gradient(0deg, var(--col-4) 10px, transparent 10px),
+		linear-gradient(0deg, var(--col-4) 6px, transparent 6px);
+	background-position:
+		2px 0,
+		1px 2px,
+		0 4px;
+	background-size:
+		4px 14px,
+		6px 10px,
+		8px 6px;
+	@extend .pixelate;
+}
+
+input[type=checkbox] {
+	margin: 0;
+	margin-right: 8px;
+	width: 25px;
+	height: 24px;
+	vertical-align: middle;
+}
+
+input[type=checkbox]:active {
+	background-color: var(--col-2);
+	color: var(--col-3);
+}
+
+input[type=checkbox]:checked {
+	background-repeat: no-repeat;
+	background-image:
+		linear-gradient(90deg, currentcolor 3px, transparent 3px),
+		linear-gradient(90deg, currentcolor 2px, transparent 2px),
+		linear-gradient(90deg, currentcolor 2px, transparent 2px),
+		linear-gradient(90deg, currentcolor 2px, transparent 2px),
+		linear-gradient(90deg, currentcolor 4px, transparent 4px, transparent 8px, currentcolor 8px),
+		linear-gradient(90deg, currentcolor 3px, transparent 3px, transparent 5px, currentcolor 5px),
+		linear-gradient(90deg, currentcolor 5px, transparent 5px),
+		linear-gradient(90deg, currentcolor 3px, transparent 3px);
+	background-position:
+		15px 2px,
+		14px 4px,
+		13px 6px,
+		12px 8px,
+		3px 10px,
+		5px 12px,
+		6px 14px,
+		7px 16px;
+	background-size:
+		3px 2px,
+		2px 2px,
+		2px 2px,
+		2px 2px,
+		10px 2px,
+		7px 2px,
+		5px 2px,
+		3px 2px;
+	@extend .pixelate;
+}
+
+.d-flex {
+	display: flex;
+}
+
+.d-flex-column {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex-1 {
+	flex: 1;
+}

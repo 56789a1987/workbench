@@ -1,0 +1,77 @@
+<app-window caption="Bytebeat" [size]="size" [minSize]="minSize" [scroller]="true" (resized)="resized($event)" (onclose)="close()">
+	<div class="container">
+		<div class="tabs">
+			Method
+			<button [class.active]="tab === 0" (click)="tab = 0">Bytebeat</button>
+			<button [class.active]="tab === 1" (click)="tab = 1">File2Wave</button>
+		</div>
+
+		<div *ngIf="tab === 0" class="tabset">
+			<div class="options para mb-4">
+				Use mathematical formulas to generate sound data
+			</div>
+			<div class="options preset">
+				Preset
+				<select [(ngModel)]="script" (change)="presetChanged()">
+					<optgroup *ngFor="let group of collection" label="{{ group.rate | khz }}">
+						<option *ngFor="let item of group.collection" [value]="item.value">{{ item.title }}</option>
+					</optgroup>
+				</select>
+			</div>
+			<div class="options">
+				<span class="item">
+					SampRate/Hz
+					<select [(ngModel)]="rate">
+						<option [ngValue]="8000">8000</option>
+						<option [ngValue]="11025">11025</option>
+						<option [ngValue]="22050">22050</option>
+						<option [ngValue]="32000">32000</option>
+						<option [ngValue]="44100">44100</option>
+					</select>
+				</span>
+				<span class="item">
+					Duration/s
+					<input type="number" min="1" pattern="[0-9]*" [(ngModel)]="duration" />
+				</span>
+				<span class="item">
+					Quality
+					<input type="number" min="1" pattern="[0-9]*" [(ngModel)]="multiplier" />
+				</span>
+			</div>
+			<textarea class="script-input" rows="10" [(ngModel)]="script"></textarea>
+			<div *ngIf="error" class="error-output">{{ error }}</div>
+			<div style="text-align: right;">
+				<button class="auto-button" [class.active]="autoplay" (click)="autoplay=!autoplay">Autoplay</button>
+				<button class="run-button" (click)="compose()">Compile&gt;</button>
+			</div>
+		</div>
+
+		<div *ngIf="tab === 1" class="tabset">
+			<div class="options para mt-8 mb-8">
+				Upload a random file and add wave metadata before the file, making the binary data of the file audible.
+			</div>
+			<div class="options para mb-4">
+				Everything is done in the front end and none of your files will be uploaded to any server.
+			</div>
+			<div class="options mb-4">
+				<span class="item">
+					SampRate/Hz
+					<input type="number" min="100" pattern="[0-9]*" step="100" style="width: 80px;" [(ngModel)]="rate2" />
+				</span>
+			</div>
+			<div class="options mb-8">
+				<button class="run-button" (click)="file.click()">Upload</button>
+				<input #file type="file" (change)="upload(file.files[0]); file.value = '';" style="display: none" />
+			</div>
+			<div class="options mb-4">
+				<button [class.active]="autoplay" (click)="autoplay=!autoplay">Autoplay</button>
+			</div>
+		</div>
+
+		<audio #audio controls="controls"></audio>
+		<canvas #canvas [height]="canvasHeight" [width]="canvasWidth"></canvas>
+		<div style="text-align: right;">
+			<button class="run-button" [disabled]="!blob" (click)="download()">Download</button>
+		</div>
+	</div>
+</app-window>

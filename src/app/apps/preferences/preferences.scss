@@ -1,0 +1,63 @@
+.container {
+	width: 100%;
+	height: 100%;
+	padding: 12px 16px;
+	background-color: var(--col-3);
+}
+
+.panel-title {
+	margin-bottom: 4px;
+}
+
+.panel {
+	background-color: var(--col-1);
+	border: 2px solid var(--col-4);
+	padding: 4px 12px;
+}
+
+.form-item:not(:first-child) {
+	display: block;
+	margin-top: 4px;
+}
+
+.range-slider {
+	align-items: center;
+
+	> input {
+		margin: 0 8px;
+		flex: 1;
+		width: 0;
+	}
+}
+
+.buttons {
+	margin: -4px;
+	width: 100%;
+	width: calc(100% + 8px);
+	height: fit-content;
+
+	td {
+		height: 100%;
+	}
+
+	button {
+		display: block;
+		width: 100%;
+		height: 100%;
+		padding: 4px;
+	}
+}
+
+.mb-1 {
+	margin-bottom: 4px;
+}
+.mb-2 {
+	margin-bottom: 8px;
+}
+.mb-3 {
+	margin-bottom: 12px;
+}
+
+.margin-left {
+	margin-left: 12px;
+}

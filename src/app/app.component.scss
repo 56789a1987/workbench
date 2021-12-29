@@ -1,0 +1,61 @@
+@import '../styles.scss';
+
+#background {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	background: #ccc;
+}
+#background.lol {
+	background-image: url('../assets/images/background.png');
+	background-position: center;
+	background-size: cover;
+}
+
+.container {
+	position: absolute;
+	overflow: hidden;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background: var(--col-1);
+	color: var(--col-4);
+	font-family: $font-family;
+	font-size: 16px;
+}
+
+.main-title {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding-left: 4px;
+}
+
+.error-bar {
+	padding: 0 4px;
+	white-space: pre;
+	text-overflow: ellipsis;
+}
+
+.main-content {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	border-top: 20px solid transparent;
+	overflow: hidden;
+
+	.main-icons {
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 100%;
+	}
+
+	.main-icons app-icon {
+		position: absolute;
+	}
+}

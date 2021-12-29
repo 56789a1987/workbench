@@ -1,0 +1,35 @@
+textarea {
+	display: block;
+	margin: 4px 4px;
+	padding: 1px 2px;
+	width: calc(100% - 8px);
+	height: 150px;
+	resize: none;
+}
+
+button {
+	height: 30px;
+	margin: 12px 4px 0 4px;
+	width: calc(100% - 8px);
+}
+
+select {
+	height: 26px;
+	margin: 0 4px;
+	width: calc(100% - 8px);
+}
+
+input[type=range] {
+	margin: 0 4px;
+	display: block;
+	width: calc(100% - 8px);
+}
+
+.label {
+	margin: 8px 6px 0 6px;
+}
+
+.label-top {
+	margin-top: 4px;
+	color: var(--col-2);
+}

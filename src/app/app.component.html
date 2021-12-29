@@ -1,0 +1,25 @@
+<div id="background"></div>
+
+<div #screen class="container" id="container" [style.top.px]="offset">
+	<div #container class="main-content" id="main-content">
+		<div class="main-icons">
+			<app-icon *ngFor="let i of icons" [label]="i.label" [icon]="i.icon" [activeIcon]="i.activeIcon" (execute)="i.execute(appPortals)"
+			[connectDir]="i.connectDir" (selected)="bringToFront(i)" (dropped)="dropIcon(i, $event.icon, $event.pointer)"
+			[noMove]="i.noMove" [style.right.px]="getX(i)" [style.top.px]="getY(i)"></app-icon>
+		</div>
+	</div>
+
+	<div class="title-bar main-title">
+		<div class="title-text" (customDrag)="dragTitle($event)">
+			<div class="title">{{ caption }}</div>
+		</div>
+		<div class="btn-group-right">
+			<div class="front-back back"></div>
+			<div class="front-back front"></div>
+		</div>
+	</div>
+
+	<div>
+		<ng-template *ngFor="let p of portals" [cdkPortalOutlet]="p.portal" (attached)=p.attached($event!)></ng-template>
+	</div>
+</div>

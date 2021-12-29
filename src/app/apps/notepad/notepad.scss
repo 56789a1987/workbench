@@ -1,0 +1,134 @@
+.container {
+	width: 100%;
+	height: 100%;
+}
+
+.panel {
+	position: relative;
+	margin: 2px;
+	margin-right: 0;
+	padding: 4px;
+	padding-bottom: 20px;
+	background-color: var(--col-4);
+}
+
+.next-button {
+	position: absolute;
+	left: -2px;
+	bottom: -2px;
+	width: 14px;
+	height: 16px;
+	border: 2px solid var(--bg);
+	background-color: var(--fg);
+	background-repeat: no-repeat;
+	background-position:
+		0px 2px,
+		0px 4px,
+		0px 6px,
+		0px 8px,
+		0px 10px;
+	background-size:
+		1px 2px,
+		3px 2px,
+		5px 2px,
+		7px 2px,
+		9px 2px;
+	background-image:
+		linear-gradient(90deg, var(--bg) 1px, transparent 1px),
+		linear-gradient(90deg, var(--bg) 3px, transparent 3px),
+		linear-gradient(90deg, var(--bg) 5px, transparent 5px),
+		linear-gradient(90deg, var(--bg) 7px, transparent 7px),
+		linear-gradient(90deg, var(--bg) 9px, transparent 9px);
+	--bg: var(--col-1);
+	--fg: var(--col-4);
+
+	&:active {
+		--bg: var(--col-2);
+		--fg: var(--col-3);
+	}
+}
+
+textarea {
+	border: none;
+	background: none;
+	color: var(--col-3);
+	resize: none;
+	width: 0;
+
+	&::selection {
+		background: var(--col-2);
+		color: var(--col-3);
+	}
+}
+
+.sidebar {
+	margin: 2px 2px 18px 1px;
+	width: 13px;
+}
+
+.scrollbar {
+	position: relative;
+
+	.thumb {
+		position: absolute;
+	}
+}
+
+.sidebar .button {
+	width: 13px;
+	height: 26px;
+	border-color: var(--fg);
+	border-right-width: 1px;
+	border-left-width: 1px;
+	--fg: var(--col-4);
+
+	&:active {
+		--fg: var(--col-3);
+	}
+}
+
+.up, .down {
+	background-repeat: no-repeat;
+	background-size:
+		1px 2px,
+		3px 2px,
+		5px 2px,
+		7px 2px,
+		9px 2px,
+		11px 2px,
+		5px 4px,
+		5px 2px;
+	background-image:
+		linear-gradient(90deg, var(--fg) 1px, transparent 1px),
+		linear-gradient(90deg, var(--fg) 1px, transparent 1px, transparent 2px, var(--fg) 2px),
+		linear-gradient(90deg, var(--fg) 1px, transparent 1px, transparent 4px, var(--fg) 4px),
+		linear-gradient(90deg, var(--fg) 1px, transparent 1px, transparent 6px, var(--fg) 6px),
+		linear-gradient(90deg, var(--fg) 1px, transparent 1px, transparent 8px, var(--fg) 8px),
+		linear-gradient(90deg, var(--fg) 4px, transparent 4px, transparent 7px, var(--fg) 7px),
+		linear-gradient(90deg, var(--fg) 1px, transparent 1px, transparent 4px, var(--fg) 4px),
+		linear-gradient(90deg, var(--fg) 5px, transparent 5px);
+}
+
+.up {
+	background-position:
+		5px 2px,
+		4px 4px,
+		3px 6px,
+		2px 8px,
+		1px 10px,
+		0px 12px,
+		3px 14px,
+		3px 18px;
+}
+
+.down {
+	background-position:
+		5px 18px,
+		4px 16px,
+		3px 14px,
+		2px 12px,
+		1px 10px,
+		0px 8px,
+		3px 4px,
+		3px 2px;
+}
